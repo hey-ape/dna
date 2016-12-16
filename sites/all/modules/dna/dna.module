@@ -1,0 +1,30 @@
+<?php
+function dna_menu() {
+    $items['dna'] = array(
+        'title' => 'DNA Completer',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('dna_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['second_helix_page'] = array(
+        'title' => "Here's your better half!",
+        'page callback' => 'second_helix',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+
+function dna_form() {
+    $form['dna'] = array(
+        '#title' => 'Your Helix',
+        '#type' => 'textfield',
+        '#description' => t('Enter your helix sequence. This should consist of only the letters A, C, G, & T!'),
+    );
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Pair my helix!',
+    );
+    return $form;
+}

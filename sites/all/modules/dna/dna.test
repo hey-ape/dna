@@ -41,9 +41,5 @@ class DnaTestCase extends DrupalUnitTestCase
         $result = put_my_thing_down_flip_it_and_reverse_it($input);
         $expected_output = 'tagccgatagct';
         $this->assertEqual($result, $expected_output, $description);
-
-        $description = 'a single input of a should return t',
-
-
     }
 }
