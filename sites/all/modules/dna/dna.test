@@ -1,0 +1,49 @@
+<?php
+class DnaTestCase extends DrupalUnitTestCase
+{
+    public static function getInfo()
+    {
+        return array(
+            'name' => 'DNA Completer',
+            'description' => 'Application that completes the second helix',
+            'group' => 'DNA Tests',
+        );
+    }
+
+    function testDNA()
+    {
+        $description = 'a single input of a should return t',
+        $input = 'a',
+        $result = put_my_thing_down_flip_it_and_reverse_it($input);
+        $expected_output = 't';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = 't single input of a should return a';
+        $input = 't';
+        $result = put_my_thing_down_flip_it_and_reverse_it($input);
+        $expected_output = 'a';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = 'c single input of a should return g';
+        $input = 'c';
+        $result = put_my_thing_down_flip_it_and_reverse_it($input);
+        $expected_output = 'g';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = 'g single input of a should return c';
+        $input = 'g';
+        $result = put_my_thing_down_flip_it_and_reverse_it($input);
+        $expected_output = 'c';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = 'application should be able handle multiple-character input from user';
+        $input = 'atcggctatcga';
+        $result = put_my_thing_down_flip_it_and_reverse_it($input);
+        $expected_output = 'tagccgatagct';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = 'a single input of a should return t',
+
+
+    }
+}

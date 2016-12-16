@@ -1,0 +1,7 @@
+name = DNA completer
+description = Provides the sequence of a second helix to the inputted parent helix by user.
+package = DNA Modules
+core = 7.x
+files[] = dna.module
+files[] = dna.test
+dependencies = simpletest
