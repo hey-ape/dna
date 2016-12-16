@@ -1,0 +1,5 @@
+name = Article Viewer
+description = Display article nodes with ajax
+package = DNA Modules
+core = 7.x
+files[] = articleviewer.module
