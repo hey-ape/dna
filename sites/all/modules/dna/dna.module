@@ -20,11 +20,23 @@ function dna_form() {
     $form['dna'] = array(
         '#title' => 'Your Helix',
         '#type' => 'textfield',
-        '#description' => t('Enter your helix sequence. This should consist of only the letters A, C, G, & T!'),
+        '#description' => t('Enter your helix sequence. This should consist of only the letters A, C, G, & T to represent the 4 nucleotides! (Separate the letter by spaces or commas or nothing at all...)'),
+        '#required' => TRUE,
+        '#element_validate' => array('element_validate_letters'),
     );
     $form['submit'] = array(
         '#type' => 'submit',
         '#value' => 'Pair my helix!',
     );
     return $form;
+}
+
+function element_validate_letters($element) {
+    // $inputNoPunct = preg_replace("#[[:punct:]]#", "", strtoupper($element));
+    // $inputNoSpace = preg_replace(" ", "", $inputNoPunct);
+    $element_string = implode("", $element);
+    $non_nucleotides = "BDEFHIJKLMNOPQRSUVWXYZ1234567890";
+    if (strpbrk(strtoupper($element_string), $non_nucleotides) != FALSE) {
+        form_error($element, t("Remember, nucleotides are represented by only the letters A, C, G, & T. Please check your input for any off characters!"));
+    }
 }
