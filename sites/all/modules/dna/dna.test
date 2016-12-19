@@ -12,34 +12,40 @@ class DnaTestCase extends DrupalUnitTestCase
 
     function testDNA()
     {
-        $description = 'a single input of a should return t',
-        $input = 'a',
+        $description = 'a single input of a should return t';
+        $input = array('A');
         $result = put_my_thing_down_flip_it_and_reverse_it($input);
-        $expected_output = 't';
+        $expected_output = array('T');
         $this->assertEqual($result, $expected_output, $description);
 
         $description = 't single input of a should return a';
-        $input = 't';
+        $input = array('T');
         $result = put_my_thing_down_flip_it_and_reverse_it($input);
-        $expected_output = 'a';
+        $expected_output = array('A');
         $this->assertEqual($result, $expected_output, $description);
 
         $description = 'c single input of a should return g';
-        $input = 'c';
+        $input = array('C');
         $result = put_my_thing_down_flip_it_and_reverse_it($input);
-        $expected_output = 'g';
+        $expected_output = array('G');
         $this->assertEqual($result, $expected_output, $description);
 
         $description = 'g single input of a should return c';
-        $input = 'g';
+        $input = array('G');
         $result = put_my_thing_down_flip_it_and_reverse_it($input);
-        $expected_output = 'c';
+        $expected_output = array('C');
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = 'application should be able handle two-character input from user';
+        $input = array('A', 'T');
+        $result = put_my_thing_down_flip_it_and_reverse_it($input);
+        $expected_output = array('T', 'A');
         $this->assertEqual($result, $expected_output, $description);
 
         $description = 'application should be able handle multiple-character input from user';
-        $input = 'atcggctatcga';
+        $input = array('A','T','C','G','G','C','T','A','T','C','G','A',);
         $result = put_my_thing_down_flip_it_and_reverse_it($input);
-        $expected_output = 'tagccgatagct';
+        $expected_output = array('T','A','G','C','C','G','A','T','A','G','C','T',);
         $this->assertEqual($result, $expected_output, $description);
     }
 }

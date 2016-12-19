@@ -32,8 +32,6 @@ function dna_form() {
 }
 
 function element_validate_letters($element) {
-    // $inputNoPunct = preg_replace("#[[:punct:]]#", "", strtoupper($element));
-    // $inputNoSpace = preg_replace(" ", "", $inputNoPunct);
     $element_array = str_split(strtoupper($element['#value']));
     $non_nucleotides = array(
         "B",
@@ -85,4 +83,35 @@ function element_validate_letters($element) {
     // }
 }
 
-// function
+function put_my_thing_down_flip_it_and_reverse_it($input_array) {
+    $second_helix_array = array();
+    foreach ($input_array as $nucleotide) {
+        if($nucleotide == "A") {
+            array_push($second_helix_array, "T");
+        } elseif ($nucleotide == "T") {
+            array_push($second_helix_array, "A");
+        } elseif ($nucleotide == "C") {
+            array_push($second_helix_array, "G");
+        } elseif ($nucleotide == "G") {
+            array_push($second_helix_array, "C");
+        }
+    }
+    return $second_helix_array;
+}
+
+function dna_form_submit($form, &$form_state) {
+    // $input = $form_state['values']['dna'];
+    $inputNoPunct = preg_replace("#[[:punct:]]#", "", strtoupper($form_state['values']['dna']));
+    $inputNoSpace = preg_replace(" ", "", $inputNoPunct);
+    $input_array = str_split($inputNoSpace);
+    $second_helix_array = put_my_thing_down_flip_it_and_reverse_it($input_array);
+
+    $_SESSION['second_helix'] = implode(" ", $second_helix_array);
+    $_SESSION['inputted_helix'] = implode(" ", $input_array);
+
+    $form_state['redirect'] = 'second_helix_page';
+}
+
+// function second_helix() {
+//     return
+// }
