@@ -77,10 +77,6 @@ function element_validate_letters($element) {
     if($count > 0) {
         form_error($element, t("Remember, nucleotides are represented by only the letters A, C, G, & T. Please check your input for any off characters!"));
     }
-
-    // if (strpbrk(strtoupper($element_string), $non_nucleotides) != FALSE) {
-    //     form_error($element, t("Remember, nucleotides are represented by only the letters A, C, G, & T. Please check your input for any off characters!"));
-    // }
 }
 
 function put_my_thing_down_flip_it_and_reverse_it($input_array) {
@@ -100,10 +96,8 @@ function put_my_thing_down_flip_it_and_reverse_it($input_array) {
 }
 
 function dna_form_submit($form, &$form_state) {
-    // $input = $form_state['values']['dna'];
     $inputNoPunct = preg_replace("#[[:punct:]]#", "", strtoupper($form_state['values']['dna']));
-    $inputNoSpace = preg_replace(" ", "", $inputNoPunct);
-    $input_array = str_split($inputNoSpace);
+    $input_array = str_split($inputNoPunct);
     $second_helix_array = put_my_thing_down_flip_it_and_reverse_it($input_array);
 
     $_SESSION['second_helix'] = implode(" ", $second_helix_array);
@@ -112,6 +106,6 @@ function dna_form_submit($form, &$form_state) {
     $form_state['redirect'] = 'second_helix_page';
 }
 
-// function second_helix() {
-//     return
-// }
+function second_helix() {
+    return '<p>Your inputted helix was ' . $_SESSION['inputted_helix'] . '</p> <p>The helix to complete a perfect double helix is ' . $_SESSION['second_helix'] . '</p> <p><img src="http://www.canalgif.net/Gifs-animados/Ciencias/ADN/Imagen-animada-ADN-29.gif" ></p>';
+}
