@@ -34,9 +34,55 @@ function dna_form() {
 function element_validate_letters($element) {
     // $inputNoPunct = preg_replace("#[[:punct:]]#", "", strtoupper($element));
     // $inputNoSpace = preg_replace(" ", "", $inputNoPunct);
-    $element_string = implode("", $element);
-    $non_nucleotides = "BDEFHIJKLMNOPQRSUVWXYZ1234567890";
-    if (strpbrk(strtoupper($element_string), $non_nucleotides) != FALSE) {
+    $element_array = str_split(strtoupper($element['#value']));
+    $non_nucleotides = array(
+        "B",
+        "D",
+        "E",
+        "F",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "0",
+    );
+    $count = 0;
+    foreach ($element_array as $character) {
+        if(in_array($character, $non_nucleotides)) {
+            $count++;
+        }
+    }
+
+    if($count > 0) {
         form_error($element, t("Remember, nucleotides are represented by only the letters A, C, G, & T. Please check your input for any off characters!"));
     }
+
+    // if (strpbrk(strtoupper($element_string), $non_nucleotides) != FALSE) {
+    //     form_error($element, t("Remember, nucleotides are represented by only the letters A, C, G, & T. Please check your input for any off characters!"));
+    // }
 }
+
+// function
