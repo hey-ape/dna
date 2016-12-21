@@ -1,4 +1,47 @@
 <?php
+//Functional testing
+class DnaTests extends DrupalWebTestCase {
+
+    public static function getInfo() {
+        return array(
+            'name' => 'DNA App Functions',
+            'description' => 'Tests for the functionality of the DNA Module.',
+            'group' => 'DNA Tests',
+        );
+    }
+
+    public function setUp() {
+        parent::setUp(array('dna'));
+    }
+
+    public function testDnaValid() {
+        $this->drupalGet('dna');
+
+        $this->assertText("DNA Completer", 'Form displayed!');
+
+        $form = array();
+        $form['dna'] = "atcg";
+        $this->drupalPost('dna', $form, t('Pair my helix!'));
+
+        $this->assertText("DNA Completer", 'Output displayed!');
+    }
+
+    public function testDnaInvalid() {
+        $this->drupalGet('dna');
+
+        $this->assertText("DNA Completer", 'Form displayed!');
+
+        $form = array();
+        $form['dna'] = "n9m";
+        $this->drupalPost('dna', $form, t('Pair my helix!'));
+
+        $this->assertText("DNA Completer", 'Error displayed!');
+    }
+
+}
+
+
+//Unit testing
 class DnaTestCase extends DrupalUnitTestCase
 {
     public static function getInfo()
